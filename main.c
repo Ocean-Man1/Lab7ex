@@ -5,21 +5,50 @@
 #define MY_PWM 0x43C00000 //This value is found in the Address editor tab in Vivado (next to Diagram tab)
 
 int main(){
- int num=0;
- int i;
 
- while(1){
-	 if(num == 1024)
-		 num = 0;
-	 else
-		 num++;
+	int num=0;
+	int num1 = 0;
+	int num2 = 0;
+	float num3 = 0;
 
-	 Xil_Out32(MY_PWM, num);
-	 Xil_Out32((MY_PWM+4), num+10);
-	 Xil_Out32((MY_PWM+8), num+25);
-	 Xil_Out32((MY_PWM+12), num+50);
+	int i;
 
-	 for(i=0;i<300000; i++);
+	while(1){
 
- }
+		if(num == 1024) {
+			num = 0;
+		}
+		else{
+			num++;
+		}
+
+		if(num1 >= 1024) {
+			num1 = 0;
+		}
+		else{
+			num1 += 2;
+		}
+
+		if(num2 >= 1024) {
+			num2 = 0;
+		}
+		else{
+			num2 += 4;
+		}
+
+		if(num3 >= 1024) {
+			num3 = 0;
+		}
+		else{
+			num3 += 0.5;
+		}
+
+
+		Xil_Out32(MY_PWM, num);
+		Xil_Out32((MY_PWM+4), num1);
+		Xil_Out32((MY_PWM+8), num2);
+		Xil_Out32((MY_PWM+12), num3);
+
+		for(i=0;i<300000; i++);
+	}
 }
